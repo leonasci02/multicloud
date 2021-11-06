@@ -43,8 +43,3 @@ jobs:
         app: devopslab-leonardonascimento
         on:
           branch: master
-
-   - stage: Stage Test
-      name: GET URL Stage
-      script:
-        - curl https://devopslab-leonardonascimento.herokuapp.com/ | grep Funcionou || travis_terminate 1;
