@@ -14,6 +14,9 @@ addons:
     organization: leonasci02
     token: ${SONAR_TOKEN}
 
+   before_install:
+   -  openssl aes-256-cbc -K $encrypted_4e798a0779bf_key -iv $encrypted_4e798a0779bf_iv -in gcpkey.json.enc -out gcpkey.json -d
+
 jobs:
   include:
     - stage: Build & Tests
@@ -48,3 +51,20 @@ jobs:
       name: GET URL Stage
       script:
         - curl https://devopslab-leonardonascimento.herokuapp.com/ | grep Funcionou || travis_terminate 1;
+
+   - stage: Production Deploy
+      name: Google Api Engine
+      script: skip
+
+      # Definir o Deploy no Google Cloud
+      deploy:
+        provider: gae
+        keyfile: ../gcpkey.json
+        project: lab-devops-cloud-330422
+        on:
+          branch: main
+
+    - stage: Production Test
+      name: GET URL Production
+      script:
+        - curl https://lab-devops-cloud-330422.uc.r.appspot.com/ | grep Funcionou || travis_terminate 1;
