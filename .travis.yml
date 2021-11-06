@@ -43,7 +43,7 @@ jobs:
         strategy: api
         api_key: $HEROKU_API_KEY
         edge: true
-        app: devopslab-leonardonascimento
+        app: devopslab-gabydias
         on:
           branch: main
 
@@ -52,14 +52,14 @@ jobs:
       script:
         - curl https://devopslab-leonardonascimento.herokuapp.com/ | grep Funcionou || travis_terminate 1;
 
-   - stage: Production Deploy
+    - stage: Production Deploy
       name: Google Api Engine
       script: skip
 
       # Definir o Deploy no Google Cloud
       deploy:
         provider: gae
-        keyfile: ../gcpkey.json
+        keyfile: gcpkey.json
         project: lab-devops-cloud-330422
         on:
           branch: main
