@@ -45,7 +45,7 @@ jobs:
         edge: true
         app: devopslab-leonardonascimento
         on:
-          branch: main
+          branch: master
 
     - stage: Stage Test
       name: GET URL Stage
@@ -62,7 +62,7 @@ jobs:
         keyfile: ../gcpkey.json
         project: lab-devops-cloud-330422
         on:
-          branch: main
+          branch: master
 
     - stage: Production Test
       name: GET URL Production
